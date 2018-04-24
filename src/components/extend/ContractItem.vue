@@ -174,7 +174,7 @@
                 <div id="signature">
                     
                 </div>
-                <span class="zhang1">乙方盖章：</span>
+                <section class="zhang1">乙方盖章：</section>
                 <div class="zhang">
                     <img src="../../assets/img/qianming/zhang.jpg" alt="乙方盖章">
                 </div>
@@ -298,32 +298,6 @@ import placeholder2 from "../../assets/placeholder.gif"
                 $('#signature').append(img)
                 $('#myModal').modal('hide')
                 this.img = dataUrl
-
-                // function fake_click(obj) {
-                //     var ev = document.createEvent("MouseEvents")
-                //     ev.initMouseEvent(
-                //         "click", true, false, window, 0, 0, 0, 0, 0
-                //         , false, false, false, false, 0, null
-                //     )
-                //     obj.dispatchEvent(ev)
-                // }
-
-                // function export_raw(name, data) {
-                //     var urlObject = window.URL || window.webkitURL || window
-
-                //     var export_blob = new Blob([data])
-
-                //     var save_link = document.createElementNS("http://www.w3.org/1999/xhtml", "a")
-                //     save_link.href = urlObject.createObjectURL(export_blob)
-                //     save_link.download = name
-                //     fake_click(save_link)
-                //     // console.log(save_link.href)
-                // }
-                // var qwe = $('#myCanvas').html()
-                // var asd = qwe.replace(/><\/div> <span data-v-68837eed="" class="zhang1">乙方盖章/g,'/></div> <span data-v-68837eed="" class="zhang1" style="margin-left:5vw">乙方盖章').replace(/><\/div><\/div><\/div>/g,'/></div></div></div>')
-                //         .replace(/id="signature"><img style="width:50vw;heigth:30vw"/g,'class="zhang"><img style="width:8vw;heigth:8vw;transform: rotate(-90deg);"')
-                //         .replace(/class="imgs">/g,'class="imgs" style="display:flex">')
-                //     export_raw('test.html', asd)
             },
             tijiao(){
                 this.$vux.loading.show({
@@ -360,7 +334,7 @@ import placeholder2 from "../../assets/placeholder.gif"
                 // 文本
                 var content1 = $('#myCanvas').html()
                 var imgData = this.imgData
-                var content = content1.replace(/><\/div> <span data-v-68837eed="" class="zhang1">乙方盖章/g,'/></div> <span data-v-68837eed="" class="zhang1" style="margin-left:5vw">乙方盖章').replace(/><\/div><\/div><\/div>/g,'/></div></div></div>')
+                var content = content1.replace(/><\/div> <section/g,'/></div> <section class="zhang1" style="margin-left:5vw">乙方盖章').replace(/><\/div><\/div><\/div>/g,'/></div></div></div>')
                         .replace(/id="signature"><img style="width:50vw;heigth:30vw"/g,'class="zhang"><img style="width:8vw;heigth:8vw;transform: rotate(-90deg);"')
                         .replace(/class="imgs">/g,'class="imgs" style="display:flex">')
                         

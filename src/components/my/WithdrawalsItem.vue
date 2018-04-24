@@ -5,28 +5,21 @@
         <div class="tu">
             <div class="logo"><img :src="yhimg"></div>
             <div class="xx">
-                <span>{{bank}}（尾号&nbsp;{{bankcard.substring(bankcard.length-4,bankcard.length)}}）</span><br><span>{{bugername}}</span>
+                <span>{{bank}}</span><br><span>{{bankcard.substring(0,4)}}**********{{bankcard.substring(bankcard.length-4,bankcard.length)}}</span>
             </div>
-        </div>
-        <p class="bd">提现银行卡为绑定的投资银行卡</p>
-        <div class="yue">
-            <span class="yuer">可提现金额</span><span>{{yuer}}</span>
         </div>
         <div class="xinxi">
             <div>
-                <label>提现金额
-                    <input type="text" class="name" name="name" placeholder="请输入提现金额">
+                <label>提现金额<br>
+                    <span class="rmb">¥</span><input type="text" class="name" v-model="value" name="name"><span class="all" @click="quan">全部提现</span>
                 </label>
             </div>
-            <p class="jine"><span>注意：单笔提现金额必需≥100元</span></p>
-            <!--<div>
-                <label>应缴税费</label><span class="shui">0.00</span>
-            </div>-->
-                <!--<input type="text" class="kahao" onkeyup="this.value=this.value.replace(/\D/g,'').replace(/....(?!$)/g,'$& ')" />-->
         </div>
-        <!--<router-link to="">-->
-            <button @click="tixian" type="button" class="btn">确认提现</button>
-        <!--</router-link>-->
+        <div class="yue">
+            <span class="yuer">可提现金额</span><span>{{yuer}}</span>
+        </div>
+        <p class="jine"><span>注意：单笔提现金额必需≥100元</span></p>
+        <button @click="tixian" type="button" class="btn">确认提现</button>
 
 
         <!--模态框-->
@@ -89,8 +82,8 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
         data(){
             return{
                 placeholder1,placeholder2,placeholder3,header:'提现',
-                token:'',userId:'',yuer:'',bankcard:'',bank:'',bugername:'',dayu:'',yhimg:'http://www.homeamc.cn:80/puman/kaptcha/api/YH'
-                
+                token:'',userId:'',yuer:'',bankcard:'',bank:'',bugername:'',dayu:'',yhimg:'http://www.homeamc.cn:80/puman/kaptcha/api/YH',
+                value:''
             }
         },
         components: {
@@ -164,6 +157,9 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
                 // alert('123')
                 // this.$router.go('/Home');
             },
+            quan(){
+                this.value = this.yuer
+            },
             tixian(){
                 var kahao = this.bankcard
                 $(document).ready(function(){
@@ -236,10 +232,10 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
     /*border: 1px solid red;*/
 }
 .yuer{
-    float: left; margin-left: 5vw; font-weight: 700;
+    float: left; margin-left: 5vw; color: gray;
 }
 .yue span:nth-child(2){
-    float: left; margin-left: 5vw; color: gray;
+    float: left; color: #FF8B4B;
 }
 .jine{
     width: 90%; height: 13vw; margin-left: 5%; color: gray; margin-top: 2vw; font-size: 3.5vw;
@@ -268,25 +264,28 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
 
 /*商铺信息*/
 .xinxi{
-    width: 100%; height: 20vw;
+    width: 100%; height: 22vw; border-bottom: 0.3vw solid gainsboro;
     /*border: 1px solid red;*/
 }
 .xinxi>div{
-    width: 90%; height: 12vw; border-bottom: 0.3vw solid gainsboro;
-    line-height: 12vw; font-size: 4vw; margin: 0 auto;
-}
-.xinxi>div:nth-child(1){
-    border-top: 0.3vw solid gainsboro;
+    width: 90%; height: 8vw;
+    line-height: 10vw; font-size: 4vw; margin: 0 auto;
 }
 .touxiang{
     width: 13vw; height: 10vw; float: right; margin-right: 5vw; 
-    border: 0.3vw solid blue; margin-top: 0.75vw;
+    border: 0.3vw solid blue;
 }
 .xinxi1{
     float: right; margin-right: 5vw;
 } 
 .name{
-    width: 55vw; height: 10vw; margin-left: 3vw; border:0; outline: none; color: gray; padding-left: 5vw; line-height: 5vw;
+    width: 55vw; height: 8vw; border:0; outline: none; color: black; line-height: 5vw; padding-left: 3vw; font-size: 6vw;
+}
+.all{
+    color: #FF8B4B; font-weight: 500; position: relative; left: 10vw;
+}
+.rmb{
+    font-weight: 600; font-size: 8vw; position: relative; top: 0.7vw;
 }
 .kahao{
     margin-left: 5vw;
@@ -307,6 +306,8 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
 a:focus{
     outline: none;
 }
+
+
 
 
 /*模态框*/
@@ -338,7 +339,7 @@ a:focus{
     width: 40%; height: 10vw; margin-right: 2vw; float: left; background-color: #3e74db; color: white!important; margin-top: 8vw; border-radius: 5vw;
 }
 .btn{
-    outline: none!important; margin-top: 10vw; background-color: black; color: white;
+    outline: none!important; margin-top: 10vw; background-color: #FF8B4B; color: white;
 }
 .chahao{
     width: 10vw; height: 18vw; margin: 4vw auto; margin-top: 10vw;
