@@ -1,0 +1,75 @@
+.weui-toast{
+    width: 35vw!important; height: 35vw!important; font-size: 4vw;
+}
+.weui-toast p{
+    width: 35vw; font-size: 4vw; margin-top: 3vw!important;
+}
+.weui-toast i{
+    width: 10vw!important; height: 10vw!important; margin-top: 5vw!important;
+}
+/*日期*/
+/*.dp-container{
+    width: 100%; height: 50vh;
+}
+.dp-header{
+    height: 6.5vh; 
+    border-bottom: 0.3vw solid gainsboro;
+}
+.dp-item{
+    font-size: 4.5vw!important;
+}
+.dp-content{
+    border: 0.3vw solid red; 
+    height: 100%;
+}
+.scroller-component{
+    border: 0.3vw solid red; height: 100%!important;
+}
+.scroller-item{
+    font-size: 4.5vw!important;
+}
+
+.scroller-indicator{
+    border-bottom: 0.3vw solid gainsboro;border-top: 0.3vw solid gainsboro;
+}
+
+.scroller-content{
+    height: 100%!important;
+}
+.dp-content>div{
+     height: 100%;
+}*/
+
+
+.vux-popup-dialog{
+    height: 58vw!important;
+}
+.weui-cell__ft{
+    font-size: 4.5vw!important; color: black!important; padding-left: 3vw; padding-right: 4vw!important;
+}
+.vux-cell-bd{
+    margin-top: 1vw; font-size: 4.5vw!important; color: black!important; padding-left: 3vw; 
+}
+.weui-cell_access .weui-cell__ft:after{
+    width: 2.3vw!important; height: 2.3vw!important; border-color: black!important; top: 3vw!important; margin-right: 1vw;
+}
+.vux-radio-label{
+    /*margin-top: 10vw!important;*/
+    position: relative; top: 2vw;
+}
+
+
+.vux-tab .vux-tab-item{
+    font-size: 4.5vw!important; line-height: 8vh!important;
+}
+
+
+
+
+#xin h1:nth-child(1){
+    font-size: 4vw;
+}
+#xin img{
+    max-width: 100%; max-height: 100%;
+}
+

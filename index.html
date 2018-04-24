@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" http-equiv="Access-Control-Allow-Origin" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" /> 
+    <title>扑满</title>
+		<!--<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>-->
+		<!--<script src="https://cdn.bootcss.com/jspdf/1.3.3/jspdf.debug.js"></script>
+		<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>-->
+
+		<link rel="stylesheet" href="http://at.alicdn.com/t/font_497277_6juko23xpsr1kyb9.css">
+    <style>
+    	html,body{
+    		margin: 0;
+    		padding: 0;
+    		box-sizing: border-box;
+				/*overflow:hidden*/
+    	}
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    <script>
+    	//设置HTML字体    rem
+    	function fontSize(){
+    		var deviceWidth = document.documentElement.clientWidth;
+    		if(deviceWidth > 600){
+    			deviceWidth = 600 ;
+    		}
+    		document.documentElement.style.fontSize = deviceWidth / 100 + 'px'
+    	}
+    	fontSize()
+    	window.onresize = function(){
+    		fontSize()
+    	}
+
+			
+    </script>
+		
+  </body>
+<script></script>
+</html>
