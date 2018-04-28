@@ -7,26 +7,20 @@
                 <span>成为权益人</span>
             </div>
         </nav>
-        <!--<div class="quanyi">
-            <div class="quanyi1"><div>1</div><span>输入合同防伪编号</span> </div>
-            <div class="quanyi2"><img :src="placeholder3"></div>
-            <div class="quanyi3"><div>2</div><span>绑定银行卡</span></div>
-        </div>-->
-        <p class="xunze">请选择待绑定成为权益人的商铺</p>
         <div id="shangpu">
-            <router-link to="/Security">
-            <div @click="quanyir(index)" class="pu" v-for="(item,index) in data" :key="index">
+            <div @click="quanyir(index)" class="pu" :class="{pus:item.beneficiary != ''}" v-for="(item,index) in data" :key="index">
                 <div><img :src="imgUrl + item.pictures"></div>
                 <div>
                     <p>方圆里&nbsp;-&nbsp;{{item.shopsnumber}}</p>
                     <br>
                     <p>{{item.area}}m²<span class="qian">{{item.totalPrice}}</span></p>
+                    <p v-if="item.beneficiary != ''">权益人：<span>{{item.beneficiary}}</span></p>
                 </div>
                 <div>
-                    <img class="img1" :src="placeholder1">
+                    <span v-show="item.beneficiary == ''">待绑定</span>
+                    <span v-show="item.beneficiary != ''">已绑定</span>
                 </div>
             </div>
-            </router-link>
             <div class="wu" v-if="data.length == 0">暂无可绑定商铺</div>
         </div>
 
@@ -90,8 +84,11 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
                 var area = this.data[index].area
                 var totalPrice = this.data[index].totalPrice
                 var id = this.data[index].id
-                // console.log(pictures)
-                this.$router.push({name:'security',query:{picturess:pictures, shopsnumbers:shopsnumber, areas:area, totalPrices:totalPrice,ids:id}})
+                if(this.data[index].beneficiary == ''){
+                    this.$router.push({name:'security',query:{picturess:pictures, shopsnumbers:shopsnumber, areas:area, totalPrices:totalPrice,ids:id}})
+                }else{
+                    this.$router.push({name:'management',query:{shopsid:id,shopsnumber:shopsnumber}})
+                }
                 
             },
             queding(){
@@ -105,9 +102,10 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
 	}
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .yuyue{
     width: 100%; height: 100vh; padding-top: 15vw;
+    background-color: #F7F7F7;
 }
 
 
@@ -137,58 +135,20 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
 }
 
 
-.quanyi{
-    width: 100%; height: 15vw; font-size: 4vw; display: flex; justify-content: space-around;
-    /*border: 1px solid red;*/
-}
-.quanyi div{
-    height: 15vw; 
-    /*border: 1px solid red;*/
-}
-.quanyi1{
-    width: 45%;height: 100%;
-}
-.quanyi1>div{
-    width: 6vw; height: 6vw; border-radius: 50%; float: left; margin-top: 4.5vw; text-align: center;
-    margin-left: 3vw; background-color: blue; color: white;line-height: 6vw;
-}
-.quanyi1>span{
-    float: left; line-height: 15vw; margin-left: 2vw; color: blue;
-}
-.quanyi2{
-    width: 10%;height: 100%; line-height: 15vw; text-align: center;
-}
-.quanyi2 img{
-    width: 10vw;
-}
-.quanyi3{
-    width: 35%;height: 100%;
-}
-.quanyi3>div{
-    width: 6vw; height: 6vw; border:0.3vw solid gray; border-radius: 50%; float: left; margin-top: 4.5vw; text-align: center;
-}
-.quanyi3>span{
-    float: left; line-height: 15vw; margin-left: 2vw;
-}
-
-.xunze{
-    display: inline-block;
-    width: 100%; height: 13vw; font-size: 4vw;
-    line-height: 13vw; padding-left: 10vw; margin: 0;
-}
-
 /*商铺*/
 #shangpu{
     width: 100%; font-size: 4vw;
     /*border:1px solid red;*/
 }
-#shangpu .pu{
-    width: 90%; height: 20vw; margin: 2vw auto;
+.pu{
+    width: 90%; height: 25vw; margin: 2vw auto; padding-top: 3.5vw; clear: both;
     /*border: 1px solid gray;*/
-    border-bottom: 1px solid #cccccc;
+    background: url('../../assets/img/home/quanyiback.png') no-repeat; background-size: 100% 100%;
 }
-#shangpu .pu:nth-child(2){
-    margin-top: 3vw;
+.pus{
+    width: 90%; height: 35vw; margin: 2vw auto; padding-top: 3.5vw; clear: both;
+    /*border: 1px solid gray;*/
+    background: url('../../assets/img/home/quanyibacks.png') no-repeat; background-size: 100% 100%;
 }
 .pu>div{
     width: 24%; height: 100%; float: left;
@@ -196,7 +156,7 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
 }
 .pu>div:nth-child(1){
     width: 15vw; height: 15vw; text-align: center; margin-top: 1vw; margin-left: 3vw;
-    line-height: 13vw; background: url('../../assets/img/qianming/icon1_shop_@2x.png') no-repeat; background-size: 100% 100%;
+    line-height: 13vw; background: url('../../assets/img/home/quanyi.png') no-repeat; background-size: 100% 100%;
 }
 .pu>div:nth-child(1)>img{
     width: 100%; height: 100%;
@@ -210,6 +170,23 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
 .pu>div:nth-child(2)>p{
     display: inline-block; margin: 0;
     height: 10vw; line-height: 8vw;
+}
+.pu>div:nth-child(2)>p:nth-child(1){
+    font-family:PingFang-SC-Bold;
+    color:rgba(68,68,68,1); font-weight: Bold;
+}
+.pu>div:nth-child(2)>p:nth-child(4){
+    font-family:PingFang-SC-Medium; font-size: 4vw; position: relative; top: -1vw;
+    color:RGBA(43, 43, 43, 1); font-weight: Medium;
+}
+.pu>div:nth-child(3){
+    text-align: center; padding-top: 1vw; color: white;
+    span{
+        background-color: RGBA(234, 22, 22, 1); padding: 0.5vw 2vw; border-radius: 1vw;
+    }
+    span:nth-child(2){
+        background-color: RGBA(98, 185, 0, 1)
+    }
 }
 .guan{
     color: black; font-weight: 600;

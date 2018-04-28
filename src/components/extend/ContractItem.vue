@@ -5,8 +5,6 @@
             <div class="header">
                 <i @click="history" class="fa fa-angle-left" aria-hidden="true"></i>
                 <span>合同详情</span>
-                <!--<i class="fas" @click="tijiao">√</i>
-                <span @click="tijiao" id="qianyue">签约提交</span>-->
                 <button @click="tijiao" type="button" class="btn btn-primary tijiao">签约提交√</button>
             </div>
         </nav>
@@ -17,8 +15,9 @@
                     <title>合同</title>
                 </head>
                 <body style ="font-family: SimSun;">
-            <strong>委托经营管理合同</strong>
-            <div style="width:100%; height:40px"> </div>
+            <div><strong>委托经营管理合同</strong></div>
+            <div id="wt" style="text-align: right;">{{bianhao}}</div>
+            <div style="width:100%; height:20px"> </div>
             <div class="jia" style="line-height: 20px;">
                 <div class="jia1"><span>甲方：</span><span>{{bugername}}</span></div>
                 <div class="jia1"><span>身份证号：</span><span>{{identnumber}}</span></div>
@@ -46,18 +45,21 @@
     
     <p> 2.3乙方可独立全权独立处理一切与该物业经营管理有关的一切内外事务。</p>
 
-    <div style="width:100%; height:30px"> </div>
+    <div style="width:100%; height:20px"> </div>
     
     <p> 第三条 委托经营管理期限</p>
     <p> 3.1该物业委托管理期限约20年，即自2016年1月1日起计算。</p>
     
     <p> 3.2委托管理期满，如无书面提出解除合同，甲方应继续委托乙方经营管理。</p>
 
-    <div style="width:100%; height:30px"> </div>
     
     <p> 第四条 双方收益约定</p>
     <p> 4.1乙方收取该项目所属区域的实际总租金的10%作为管理费，乙方在扣除该项管理费后，应甲方申请，将按甲方在该项目所占物业份额比例（物业份额比例=该物业建筑面积÷该项目统一经营区域建筑面积×位置系数），分配甲方应得的税前收益；其中，自2017年1月1日起，若乙方连续2年税前年收益低于市场平均价值，视为乙方管理不利，甲方有权要求解除合同。</p>
     
+    <div><small>{{page[0]}}/{{page[4]}}</small></div>
+
+    <div style="width:100%; height:10px; "></div>
+
     <p> 4.2甲方授权乙方代办税务发票（租金税费由甲方承担并由乙方代扣代缴，乙方可在支付甲方应得收益时直接扣除对应租金税费）。</p>
     
     <p> 4.3甲方如需变更账户需提前书面通知乙方，否则引起乙方无法支付收益或支付错误的后果由甲方承担。</p>
@@ -66,7 +68,7 @@
     <p> 4.5 支付方式：由甲方注册成为“扑满APP”的会员，根据系统提示的流程成为商铺权益人之后，在系统中申请租金提现，乙方客服人员将于7日内处理甲方申请事项。</p>
 
     
-    <div style="width:100%; height:30px"> </div>
+    <div style="width:100%; height:20px"> </div>
     
     <p> 第五条 双方权利与义务</p>
     <p> 5.1甲方的权利与义务</p>
@@ -94,6 +96,8 @@
     <p> 5.2.4委托经营管理期间，甲方应付的物业管理、水、电（含公摊部分）及通讯等费用均由乙方或实际占用人承担。</p>
     
     <p> 5.2.5乙方应按照法律规定交纳在经营管理过程中的相关税费。</p>
+
+    <div><small>{{page[1]}}/{{page[4]}}</small></div>
     <div style="width:100%; height:30px"> </div>
     
     <p> 第六条 物业的交付和返还</p>
@@ -124,6 +128,8 @@
     
     <p> 8.1.1该物业占用范围内的土地使用权依法提前收回；</p>
     
+    <div><small>{{page[2]}}/{{page[4]}}</small></div>
+
     <p> 8.1.2该物业因社会公共利益被依法征用的；</p>
     
     <p> 8.1.3该物业因城市建设需要被依法列入拆迁许可范围内；</p>
@@ -157,7 +163,9 @@
     
     <p> 11.2不可抗力为当事人无法预见、无法避免、无法控制、无法克服的意外事件（如战争、车祸等）或自然灾害（如地震、火灾、水灾等）。</p>
 
-    <div style="width:100%; height:20px"> </div>
+    <div style="width:100%; height:50px"> </div>
+
+    <div><small>{{page[3]}}/{{page[4]}}</small></div>
     
     <p> 第十二条 附则</p>
     <p> 12.1本合同未尽事宜，经双方协商一致，可订立补充条款，该补充条款作为对本合同的修正；</p>
@@ -174,14 +182,19 @@
                 <div id="signature">
                     
                 </div>
-                <section class="zhang1">乙方盖章：</section>
+                <section id="kongge"></section>
+                <div class="zhang1">乙方盖章：</div>
                 <div class="zhang">
                     <img src="../../assets/img/qianming/zhang.jpg" alt="乙方盖章">
                 </div>
             </div>
+
+            <div class="date" style="width:100%; clear: both; text-align:right; padding-right:100px; box-sizing: border-box; margin-top: 30px;">{{date}}</div>
             
             </div>
             <footer>
+                <div id="ge"></div>
+                <div><small>{{page[4]}}/{{page[4]}}</small></div>
             </footer>
         </body>
     </html>
@@ -228,7 +241,7 @@ import placeholder2 from "../../assets/placeholder.gif"
             return{
                 placeholder1,placeholder2,
                 guan:'',guan1:'',guan2:'',guan3:'',proname:'',shopsid:'',img:'',imgData:'',
-                sha1_hashs:'',phone:'',identnumber:'',bugername:'',
+                sha1_hashs:'',phone:'',identnumber:'',bugername:'',date:'',bianhao:'',page:[1,2,3,4,5]
             }
         },
         components: {
@@ -317,6 +330,8 @@ import placeholder2 from "../../assets/placeholder.gif"
                 // 合同编号
                 var bianhao = 'WT' + year + this.jialing(month) + this.jialing(day) + this.jialing(hour) + this.jialing(minute) + this.jialing(seconds) + this.guan
                 // console.log('时间--'+time + '---合同编号--'+bianhao)
+                this.bianhao = bianhao
+                this.date = year+'年'+this.jialing(month)+'月'+this.jialing(day)+'日'
                 var token
                 function get(token1) {
                     var v = window.document.cookie.match('(^|;) ?' + token1 + '=([^;]*)(;|$)');
@@ -332,23 +347,31 @@ import placeholder2 from "../../assets/placeholder.gif"
                 // console.log(pngstr)
                 // pngstr = new Blob([written], { type: "img/png"})
                 // 文本
-                var content1 = $('#myCanvas').html()
-                var imgData = this.imgData
-                var content = content1.replace(/><\/div> <section/g,'/></div> <section class="zhang1" style="margin-left:5vw">乙方盖章').replace(/><\/div><\/div><\/div>/g,'/></div></div></div>')
-                        .replace(/id="signature"><img style="width:50vw;heigth:30vw"/g,'class="zhang"><img style="width:8vw;heigth:8vw;transform: rotate(-90deg);"')
-                        .replace(/class="imgs">/g,'class="imgs" style="display:flex">')
-                        
-                    // console.log(content)
-                content = new Blob([content], { type: "text/html" })
-                // 创建 formData 对象
-                var formData = new FormData()
-                formData.append('token', token)
-                formData.append('operatime', time)
-                formData.append('pngstr', pngstr)
-                formData.append("content", content, "text.html")
-                formData.append('contractnumber', bianhao)
-                formData.append('shopsid', shopsid)
-                this.sign(formData)
+                setTimeout(()=>{
+                    var content1 = $('#myCanvas').html()
+                    var imgData = this.imgData
+                    var content = content1.replace(/><\/div> <section/g,'/></div> <section style="width:100px; height: 200px; float:left"').replace(/alt="乙方盖章"><\/div><\/div>/g,'alt="乙方盖章"/></div></div>')
+                                        .replace(/id="signature"><img style="width:50vw;heigth:30vw"/g,'id="signature"><img style="width:150px;heigth:150px; transform: rotate(-90deg);"')
+                                        .replace(/id="signature">/g,'id="signature" style="float:left">')
+                                        .replace(/>甲方签名：/g,' style="float:left">甲方签名：')
+                                        .replace(/class="zhang">/g,'class="zhang" style="float:left">')
+                                        .replace(/><strong/g,' style="width:100%; text-align: center;"><strong')
+                                        .replace(/><small/g,' style="width:100%; text-align: center; font-size:20px"><small')
+                                        .replace(/id="ge"/g,'style="width:100%; height: 500px;" id="ge"')
+                                        .replace(/class="zhang1"/g,'style="float:left;" class="zhang1"')
+                            
+                        // console.log(content)
+                    content = new Blob([content], { type: "text/html" })
+                    // 创建 formData 对象
+                    var formData = new FormData()
+                    formData.append('token', token)
+                    formData.append('operatime', time)
+                    formData.append('pngstr', pngstr)
+                    formData.append("content", content, "text.html")
+                    formData.append('contractnumber', bianhao)
+                    formData.append('shopsid', shopsid)
+                    this.sign(formData)
+                },500)
 
             },
             jialing(num){
@@ -548,5 +571,14 @@ a:focus{
 
 .tijiao{
     width: 25vw; height: 8vw; float: right; margin-top: 3.5vw; margin-right: 2vw; padding: 0;
+}
+
+
+.date{
+    width: 100%!important; text-align: right!important; padding-right: 5vw!important; font-size: 4vw;
+}
+
+small{
+    display: none;
 }
 </style>

@@ -14,15 +14,15 @@
                         <img src="../../assets/img/home/quan1@2x.png" alt="">
                     </div>
                 </div>
-                <div class="xinxi" @click="jilu">
-                    <div>                   
+                <div class="xinxi">
+                    <div @click="yiti">                   
                         <p>
                             <span v-show="isShow1">&nbsp;&nbsp;{{data.alreadyCash}}</span>
                             <span v-show="isShow">&nbsp;&nbsp;0.00</span>
                         </p>
                         <p>已提现</p>
                     </div>
-                    <div>                
+                    <div @click="tixian">                
                         <p>
                             <span v-show="isShow1">&nbsp;&nbsp;{{data.applyCash}}</span>
                             <span v-show="isShow">&nbsp;&nbsp;0.00</span>
@@ -191,6 +191,7 @@ import { Group, PopupRadio } from 'vux'
                     // console.log(response.body)
                     if(response.body.code == 200){
                         this.DataList = response.body.signedcertificate
+                        // this.$storage.setStore('xiugais',response.body.xiugai)
                         if(response.body.signedcertificate.length == 0){
                             this.Data.push('商铺号')
                             this.option1 = '商铺号'
@@ -280,8 +281,11 @@ import { Group, PopupRadio } from 'vux'
             knowledge(){
                 this.$router.push({path:'knowledge'})
             },
-            jilu(){
-                this.$router.push({path:'Balance'})
+            yiti(){
+                this.$router.push({path:'Balance',query:{num:1}})
+            },
+            tixian(){
+                this.$router.push({path:'Balance',query:{num:0}})
             }
         },
         destroyed(){

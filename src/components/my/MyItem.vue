@@ -82,7 +82,7 @@
                 <span>设置</span>
             </div>
             <router-link to="/Systemsettings">
-                <span class="shezhi">系统设置</span><span class="fa fa-angle-right"></span>
+                <p><span class="shezhi">系统设置</span><span class="fa fa-angle-right"></span></p>
             </router-link>
         </div>
 

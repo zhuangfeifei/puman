@@ -3,7 +3,7 @@
     <div class="yuyue">
         <header-item :headers="header"></header-item>
         <div class="tu">
-            <div class="logo"><img :src="yhimg"></div>
+            <div class="logo" @click="asdas"><img :src="yhimg"></div>
             <div class="xx">
                 <span>{{bank}}</span><br><span>{{bankcard.substring(0,4)}}**********{{bankcard.substring(bankcard.length-4,bankcard.length)}}</span>
             </div>
@@ -11,15 +11,15 @@
         <div class="xinxi">
             <div>
                 <label>提现金额<br>
-                    <span class="rmb">¥</span><input type="text" class="name" v-model="value" name="name"><span class="all" @click="quan">全部提现</span>
+                    <span class="rmb">¥</span><input type="text" class="name" placeholder="请输入金额" v-model="value" name="name"><span class="all" @click="quan">全部提现</span>
                 </label>
             </div>
         </div>
         <div class="yue">
             <span class="yuer">可提现金额</span><span>{{yuer}}</span>
         </div>
-        <p class="jine"><span>注意：单笔提现金额必需≥100元</span></p>
-        <button @click="tixian" type="button" class="btn">确认提现</button>
+        <p class="jine"><span>注意：单笔提现金额必需≥100元，可能会有延迟等问题。</span></p>
+        <button @click="tixian" type="button" :disabled="checked" class="btn" :class="{btns:checked}">确认提现</button>
 
 
         <!--模态框-->
@@ -83,7 +83,7 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
             return{
                 placeholder1,placeholder2,placeholder3,header:'提现',
                 token:'',userId:'',yuer:'',bankcard:'',bank:'',bugername:'',dayu:'',yhimg:'http://www.homeamc.cn:80/puman/kaptcha/api/YH',
-                value:''
+                value:'',checked:true
             }
         },
         components: {
@@ -150,32 +150,34 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
             })
         },
         methods: {
+            asdas(){
+                this.$router.push({name:'zhifuwc'})
+            },
             history() {
                 this.$router.push({ name: "home" })
-            },
-            qwe(){
-                // alert('123')
-                // this.$router.go('/Home');
             },
             quan(){
                 this.value = this.yuer
             },
             tixian(){
                 var kahao = this.bankcard
+                var yuer = parseInt(this.yuer)
                 $(document).ready(function(){
-                    var asd = $('.name').val()
-                    if(asd == '' && asd <= 0){
-                        $('.modal-bodys1').text('金额不能为空')
+                    var asd = parseInt($('.name').val())
+                    if(asd == '' || asd < 100 || asd > yuer){
+                        $('.modal-bodys1').text('金额不能小于100元或大于余额')
                         $('#myModal1').modal('show')
                         setTimeout(() => {
                             $('#myModal1').modal('hide')
                         },3000)
+                        return
                     }
                     if (kahao == '') {
                         $('.modal-bodys2').text('银行卡为空，请先签约')
                         $('#myModal2').modal('show')
+                        return
                     }
-                    if(asd > 0 && kahao != ''){
+                    if(kahao != ''){
                         $('.modal-bodys').text('您确定提现吗！')
                         $('#myModal').modal('show')
                     }
@@ -215,6 +217,15 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
             sign(){
                 $('#myModal2').modal('hide')
                 this.$router.push({ name: "sign" })
+            }
+        },
+        watch:{
+            value(val,old){
+                if(val != ''){
+                    this.checked = false
+                }else{
+                    this.checked = true
+                }
             }
         }
 	}
@@ -281,6 +292,12 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
 .name{
     width: 55vw; height: 8vw; border:0; outline: none; color: black; line-height: 5vw; padding-left: 3vw; font-size: 6vw;
 }
+input:-moz-placeholder{
+    font-size: 4vw; color: RGBA(206, 206, 206, 1); line-height: 8vw;
+}
+input::-webkit-input-placeholder{
+    font-size: 4vw; color: RGBA(206, 206, 206, 1); line-height: 8vw;
+}
 .all{
     color: #FF8B4B; font-weight: 500; position: relative; left: 10vw;
 }
@@ -299,6 +316,9 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
 
 .btn{
     width: 90%; height: 12vw; font-size: 4.5vw; margin-left: 5vw; margin-top: 10vw; outline: none!important;
+}
+.btns{
+    background-color: RGBA(206, 206, 206, 1)!important;
 }
 .xieyi a{
     color: blue;
@@ -344,6 +364,9 @@ a:focus{
 .chahao{
     width: 10vw; height: 18vw; margin: 4vw auto; margin-top: 10vw;
     background: url("../../assets/img/tanchuang/img_cancel_@2x.png") no-repeat; background-size: 100% 100%;
+}
+.btn:hover{
+    color: white;
 }
 
 

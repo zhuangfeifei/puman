@@ -4,14 +4,12 @@
         <header-item :headers="header"></header-item>
         <div class="tu" @click="detail">
             <div class="logo"><img :src="logo"></div>
-            <div class="xx">
-                <span>{{bank}}</span><br><span>借记卡</span><br><span>{{bankcard}}</span>
+            <div class="xx" v-if="bankcardssss">
+                <span>{{bank}}</span><br><br><span>{{bankcard}}</span>
             </div>
         </div>
         
-        <!--<router-link to="">-->
-            <button @click="genhuan" type="button" class="btn">更换银行卡</button>
-        <!--</router-link>-->
+        <button @click="genhuan" type="button" class="btn">更换银行卡</button>
         
     </div>
 
@@ -23,7 +21,7 @@ import Header from "../home/header"
 		name: "shops-item",
         data() {
             return {
-                bank:'',type:'',bankcard:'',header:'我的银行卡',logo:''
+                bank:'',type:'',bankcard:'',header:'我的银行卡',logo:'',bankcardssss:''
             }
         },
         components: {
@@ -51,6 +49,8 @@ import Header from "../home/header"
             // console.log(this.type,this.bankcard)
             this.logo = this.$storage.getStore('logo')
             // console.log(this.logo)
+
+            this.bankcardssss = bankcard
         },
         methods: {
             history() {
@@ -79,8 +79,8 @@ import Header from "../home/header"
 
 /*商铺图*/
 .tu{
-    width: 90%; height: 30vw; margin-left: 5%; border-radius: 3vw;
-    margin-top: 18vw; background-color: #007acc; color: white;
+    width: 90%; height: 30vw; margin-left: 5%; border-radius: 3vw; font-size: 4vw;
+    margin-top: 18vw; color: black; border: 1px solid black;
 }
 .logo{
     width: 15vw; height: 15vw; border-radius: 50%; margin-left: 5vw; margin-top: 7.5vw; float: left;

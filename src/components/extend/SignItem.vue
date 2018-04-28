@@ -151,7 +151,7 @@ import placeholder2 from "../../assets/placeholder.gif"
                 set('guan', guan1, 1)
                 set('proname', proname1, 1)
                 set('shopsid', shopsid1, 1)
-                if (this.verificationStatus == 0) {
+                if (this.verificationStatus == 1) {
                     $('.modal-bodys').text('您未身份验证，请先验证！')
                     $('#myModal').modal('show')
                 }else{

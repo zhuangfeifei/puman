@@ -183,7 +183,7 @@ import {httpUrl} from "../../api.js"
                             var identnumber1 = response.body.user.identnumber
                             var imgs = httpUrl.imgUrl + response.body.user.picture
                             var bankcard1 = response.body.user.bankNo
-                            var bank1 = encodeURI(encodeURI(response.body.user.accountBankName))
+                            var bank1 = encodeURI(encodeURI(response.body.user.bankName))
                             // console.log(bankcard1)
                             function set(name, value, days) {
                                 var d = new Date;

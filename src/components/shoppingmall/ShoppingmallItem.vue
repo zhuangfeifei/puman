@@ -14,15 +14,15 @@
                         <img src="../../assets/img/home/quan1@2x.png" alt="">
                     </div>
                 </div>
-                <div class="xinxi" @click="jilu">
-                    <div>                   
+                <div class="xinxi">
+                    <div @click="yiti">                   
                         <p>
                             <span v-show="isShow1">&nbsp;&nbsp;{{data.alreadyCash}}</span>
                             <span v-show="isShow">&nbsp;&nbsp;0.00</span>
                         </p>
                         <p>已提现</p>
                     </div>
-                    <div>                
+                    <div @click="tixian">                
                         <p>
                             <span v-show="isShow1">&nbsp;&nbsp;{{data.applyCash}}</span>
                             <span v-show="isShow">&nbsp;&nbsp;0.00</span>
@@ -156,8 +156,11 @@ import { Loading, XButton} from 'vux'
                 var shopId1 = this.array[index].shopId
                 this.$router.push({name:'detailed',query:{shopId:shopId1}})
             },
-            jilu(){
-                this.$router.push({path:'Balance'})
+            yiti(){
+                this.$router.push({path:'Balance',query:{num:1}})
+            },
+            tixian(){
+                this.$router.push({path:'Balance',query:{num:0}})
             }
         }
 	}

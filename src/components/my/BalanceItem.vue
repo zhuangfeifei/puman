@@ -4,78 +4,32 @@
         <nav id="nav">
             <div class="header">
                 <i @click="history" class="fa fa-angle-left" aria-hidden="true"></i>
-                <span>余额</span>
+                <span v-if="showList == 0">提现中</span>
+                <span v-else>已提现</span>
             </div>
         </nav>
         
-        <div class="liu">
-            <div class="qian">
-                <p>余额(元)</p>
-                <p>{{Data.account}}</p>
+        <div v-show="showList == 0" class="lists" v-for="(item,index) in Data" :key="index">
+            <div>
+                <img src="../../assets/img/my/tixian.png" alt="">
+                <div><span>最近提现中金额</span><span>{{item.drawDate}}</span></div>
+                <p>¥{{item.drawCash}}</p>
+                <div><span>{{item.bankName}}</span><span>{{item.bankNo | banknos}}</span></div>
             </div>
-            <!--<div class="qian1">
-                <p>
-                    <router-link to="/Recharge">
-                        <span class="glyphicon glyphicon-plus"></span>充值
-                    </router-link>
-                </p>
-                <p>
-                    <router-link to="/Withdrawals">
-                        <span class="glyphicon glyphicon-minus"></span>提现
-                    </router-link>
-                </p>
-            </div>-->
-            <div id="box">
-			    <!--<ul id="tab">
-				    <li class="current">全部</li>
-				    <li>充值</li>
-				    <li>提现</li>
-			    </ul>-->
-                <div>
-                    <div class="content" style="display:block;">
-                        <div class="jiange"></div>
-                        <div class="content1" v-for="(item,index) in Data.list" :key="index">
-                            <div><span>提现</span><br><span>{{item.drawDate}}</span></div>
-                            <div><span>-{{item.drawCash}}</span><br><span>余额：{{item.accountBalance}}</span></div>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div class="jiange"></div>
-                        <!--<div class="content1">
-                            <div><span>充值</span><br><span>2017-05-01</span></div>
-                            <div><span>+48.00</span><br><span>余额：300.00</span></div>
-                        </div>
-                        <div class="content1">
-                            <div><span>充值</span><br><span>2017-05-01</span></div>
-                            <div><span>+48.00</span><br><span>余额：200.00</span></div>
-                        </div>
-                        <div class="content1">
-                            <div><span>充值</span><br><span>2017-05-01</span></div>
-                            <div><span>+48.00</span><br><span>余额：100.00</span></div>
-                        </div>
-                        <div class="content1">
-                            <div><span>充值</span><br><span>2017-05-01</span></div>
-                            <div><span>+48.00</span><br><span>余额：200.00</span></div>
-                        </div>-->
-                    </div>
-                    <div class="content">
-                        <div class="jiange"></div>
-                        <!--<div class="content1">
-                            <div><span>提现</span><br><span>2017-05-01</span></div>
-                            <div><span>-48.00</span><br><span>余额：100.00</span></div>
-                        </div>
-                        <div class="content1">
-                            <div><span>提现</span><br><span>2017-05-01</span></div>
-                            <div><span>-48.00</span><br><span>余额：200.00</span></div>
-                        </div>
-                        <div class="content1">
-                            <div><span>提现</span><br><span>2017-05-01</span></div>
-                            <div><span>-48.00</span><br><span>余额：300.00</span></div>
-                        </div>-->
-                    </div>
-                </div>		
-		    </div>
         </div>
+
+
+        <div v-show="showList == 1" class="listss" v-for="(item,index) in Data" :key="index">
+            <p>{{item.drawDate}}</p>
+            <div>
+                <img v-if="item.status === '不通过'" src="../../assets/img/my/weitong.png" alt="">
+                <img v-else src="../../assets/img/my/yiti.png" alt="">
+                <p>¥{{item.drawCash}}</p>
+                <div><span>{{item.bankName}}</span><span>{{item.bankNo | banknos}}</span></div>
+            </div>
+        </div>
+
+        <div v-if="show" class="wu">暂无提现记录！</div>
         
     </div>
 
@@ -90,7 +44,7 @@ import placeholder from "../../assets/placeholder.gif"
 		name: "loginpassword-item",
         data(){
             return{
-                placeholder,Data:''
+                placeholder,Data:'',show:false,showList:''
             }
         },
         created(){
@@ -105,12 +59,16 @@ import placeholder from "../../assets/placeholder.gif"
             }
             get('token','userId')
             // console.log(token,userId)
+            this.showList = this.$route.query.num
             var shopsid = this.$route.query.shopsid
-            this.$http.post(httpUrl.dev + '/puman/api/rent/account', { token, userId }, { emulateJSON: true })
+            this.$http.post(httpUrl.dev + '/puman/api/rent/draw', { token, userId, type:this.showList }, { emulateJSON: true })
                 .then(response => {
                     // console.log(response.body)
                     if (response.body.code == 200) {
-                        this.Data = response.body
+                        this.Data = response.body.list
+                        if(response.body.list.length == 0){
+                            this.show = true
+                        }
                     }
                 }, response => {
                     this.$vux.loading.show({
@@ -120,23 +78,21 @@ import placeholder from "../../assets/placeholder.gif"
                         this.$vux.loading.hide()
                     },3000)
                 })
-            $(document).ready(function(){
-                $('#tab li').click(function(){
-                    var i = $(this).index()
-                    $(this).addClass('current').siblings().removeClass('current')
-                    $('.content').eq(i).show().siblings().hide()
-                })
-            })
         },
         methods: {
             history() {
                 history.go(-1)
             }
         },
+        filters:{
+            banknos(val){
+                return val.substring(0,4)+'*******'+val.substring(val.length-4,val.length)
+            }
+        }
 	}
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .yuyue{
     width: 100%; padding-top: 15vw;
 }
@@ -161,101 +117,66 @@ import placeholder from "../../assets/placeholder.gif"
     font-size: 5.5vw; 
     line-height: 15vw;
 }
-#nav>img{
-    margin-top: -5vw; width: 100%;
+
+
+
+.lists{
+    width: 100%; font-size: 4vw; color:rgba(43,43,43,1); margin-top: 5vw;
+    // border-bottom: 1px solid black;
+    img{
+        width: 18vw; height: 9vw; position: relative; left: -3vw;
+    }
+    p{
+        color: RGBA(43, 43, 43, 1); font-weight: Regular; text-align: center; margin-top: 3vw;
+    }
+}
+.lists>div{
+    width: 80%; height: 43vw; margin: 0 auto; padding-top: 3vw;
+    // border: 1px solid black;
+    background:rgba(255,255,255,1); border-radius: 8px; box-shadow:0px 0px 10px rgba(43,43,43,0.1);
+    div:nth-child(2){
+        width: 100%; height: 5vw; display: flex; justify-content: space-between; padding: 0 3vw; color:rgba(128,128,128,1);
+    }
+    p{
+         font-weight: Bold; font-size: 7vw;
+    }
+    div:nth-child(4){
+        width: 100%; height: 5vw; display: flex; justify-content: space-around; padding: 0 3vw; color:rgba(75,75,75,1); 
+        font-size: 4.3vw;
+    }
+}
+
+
+.listss{
+    width: 100%; font-size: 4vw; color:rgba(43,43,43,1);
+    // border-bottom: 1px solid black;
+    img{
+        width: 18vw; height: 9vw; position: relative; left: -3vw;
+    }
+    p{
+        color: RGBA(43, 43, 43, 1); font-weight: Regular; text-align: center; margin-top: 3vw;
+    }
+}
+.listss>div{
+    width: 80%; height: 35vw; margin: 0 auto; padding-top: 3vw;
+    // border: 1px solid black;
+    background:rgba(255,255,255,1); border-radius: 8px; box-shadow:0px 0px 10px rgba(43,43,43,0.1);
+    p{
+         font-weight: Bold; font-size: 7vw; margin-top: -2vw;
+    }
+    div:nth-child(3){
+        width: 100%; height: 5vw; display: flex; justify-content: space-around; padding: 0 5vw; color:rgba(75,75,75,1); 
+        font-size: 4.3vw; 
+    }
+}
+
+
+.wu{
+    width: 100%; text-align: center; color: gray; font-size: 4vw; margin-top: 50vw;
 }
 
 
 
-/**/
-.liu{
-    width: 100%;
-    font-size: 4vw;
-    /*border:1px solid red;*/
-}
-.qian{
-    width: 100%; height: 40vw;
-    /*background-color: #007acc;*/
-}
-.qian>p:nth-child(1){
-    display: inline-block; font-size: 6vw; font-weight: 600;
-    color: black; margin: 5vw
-}
-.qian>p:nth-child(2){
-    margin-left: 5vw;
-    font-size: 10vw; font-weight: 600;
-}
-.qian1{
-    width: 100%; height: 10vw;
-    border-bottom: 0.3vw solid gainsboro;
-    display: flex; justify-content: space-around;
-    text-align: center; font-size: 4.5vw;
-}
-.qian1 p{
-    width: 50%; height: 10vw; 
-    line-height: 10vw;
-}
-.qian1 p span{
-    color: #1E9FFF; 
-}
-
-
-
-
-#box {
-    width: 100%;
-}
-
-#tab {
-    border-bottom: 0.6vw solid gainsboro; 
-    width: 100%; height: 10vw;
-    list-style-type: none; 
-    display: flex; justify-content: space-around;
-    padding: 0 10vw;
-    /*border: 1px solid red;*/
-    border-bottom: 0.3vw solid gray;
-}
-ul{
-    margin: 0; padding: 0
-}
-#tab li {
-    color: black; width: 20%; height: 10vw;
-    display: inline-block; text-align: center;
-    /*border: 1px solid red;*/
-    line-height: 10vw; font-size: 4.5vw;
-}
-.content {
-    display: none;
-    width: 100%; 
-    /*border: 1px solid blue;*/
-}
-.jiange{
-    width: 100%; height: 3vw;
-    background-color: gainsboro;
-}
-.content1{
-    width: 100%; height: 15vw;
-    /*border: 1px solid red;*/
-    border-bottom: 0.3vw solid gainsboro;
-}
-.content1>div{
-    width: 40%; height: 100%;
-    /*border: 1px solid black;*/
-    padding: 2vw;
-}
-.content1>div:nth-child(1){ 
-    float: left; margin-left: 7vw;
-}
-.content1>div:nth-child(2){
-    float: right; margin-right: 7vw;
-}
-.content1>div:nth-child(2)>span{
-    float: right;
-}
-.current {
-    color: blue !important;
-    border-bottom: 0.6vw solid blue !important;
-}
 
 a{
     color: black;
