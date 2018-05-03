@@ -72,30 +72,6 @@
                     <span>提现</span>
                 </div>
             </router-link>
-            <!--<router-link to="/Home">
-                <div>
-                    <img src="../../assets/img/home/shop@2x.png" alt=""> <br>
-                    <span>商城</span>
-                </div>
-            </router-link>
-            <router-link to="/Home">
-                <div>
-                    <img src="../../assets/img/home/qiandao@2x.png" alt=""> <br>
-                    <span>签到</span>
-                </div>
-            </router-link>
-            <router-link to="/Home">
-                <div>
-                    <img src="../../assets/img/home/pinpaishangjia@2x.png" alt=""> <br>
-                    <span>品牌商家</span>
-                </div>
-            </router-link>
-            <router-link to="/Home">
-                <div>
-                    <img src="../../assets/img/home/more@2x.png" alt=""> <br>
-                    <span>更多</span>
-                </div>
-            </router-link>-->
         </div>
 
         <div class="wangian">

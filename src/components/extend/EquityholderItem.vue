@@ -24,7 +24,22 @@
             <div class="wu" v-if="data.length == 0">暂无可绑定商铺</div>
         </div>
 
-
+        <!--模态框-->
+            <div class="modal fade bs-example-modal-sm" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="bao"></div>
+                        <div class="modal-body">
+                            <p class="modal-bodys2"></p>
+                        </div>  
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-white guanbi" data-dismiss="modal">取消</button>
+                            <button @click="sign" type="button" class="btn btn-white queding">前往签约</button>
+                        </div>
+                        <div class="chahao" data-dismiss="modal"></div>
+                    </div>
+                </div>
+            </div>
        
     </div>
 
@@ -84,9 +99,22 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
                 var area = this.data[index].area
                 var totalPrice = this.data[index].totalPrice
                 var id = this.data[index].id
-                if(this.data[index].beneficiary == ''){
+                if(this.data[index].deleStatus == 0){
+                    $('.modal-bodys2').text('该铺尚未签约，请先签约！')
+                    $('#myModal2').modal('show')
+                }
+                if(this.data[index].deleStatus == 1){
+                    $('.modal-bodys2').text('签约尚未审核，请待审核！')
+                    $('#myModal2').modal('show')
+                }
+                if(this.data[index].deleStatus == 3){
+                    $('.modal-bodys2').text('签约未通过，请重新签约！')
+                    $('#myModal2').modal('show')
+                }
+                if(this.data[index].beneficiary == '' && this.data[index].deleStatus == 2){
                     this.$router.push({name:'security',query:{picturess:pictures, shopsnumbers:shopsnumber, areas:area, totalPrices:totalPrice,ids:id}})
-                }else{
+                }
+                if(this.data[index].beneficiary != ''){
                     this.$router.push({name:'management',query:{shopsid:id,shopsnumber:shopsnumber}})
                 }
                 
@@ -94,6 +122,12 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
             queding(){
                 $('#myModal').modal('hide')
                 this.$router.push({name:'withdrawals'})
+            },
+            sign(){
+                $('#myModal2').modal('hide')
+                setTimeout(()=>{
+                    this.$router.push({name:'sign'})
+                },500)
             }
         },
         // updated(){
@@ -228,16 +262,16 @@ a:focus{
 }
 .modal-footer{border: 0; height: 15vw; padding: 0 2vw 0 0;}
 .guanbi{
-    width: 48%; height: 10vw; margin-right: 1vw; float: left; background-color: #cccccc; color: white!important; margin-top: 8vw; border-radius: 5vw; margin-left: 3vw;
+    width: 48%; height: 10vw; margin-right: 1vw; float: left; background-color: #FF8B4B; color: white!important; margin-top: 2vw; border-radius: 5vw; margin-left: 3vw;
 }
 .queding{
-    width: 40%; height: 10vw; float: left; background-color: #3e74db; color: white!important; margin-top: 8vw; border-radius: 5vw;
+    width: 40%; height: 10vw; float: left; background-color: #FF8B4B; color: white!important; margin-top: 2vw; border-radius: 5vw;
 }
 .btn{
     outline: none!important;
 }
 .chahao{
-    width: 10vw; height: 18vw; margin: 4vw auto; margin-top: 10vw;
+    width: 10vw; height: 18vw; margin: 4vw auto; margin-top: 2vw;
     background: url("../../assets/img/tanchuang/img_cancel_@2x.png") no-repeat; background-size: 100% 100%;
 }
 

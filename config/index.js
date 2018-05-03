@@ -30,7 +30,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       "/fangyuanli":{
-    		target:"http://192.168.1.137:8080",
+    		target:"http://192.168.1.79:8080",
     		changeOrigin: true,
     		pathRewrite: {
           '^/fangyuanli': ''

@@ -151,7 +151,7 @@ import placeholder2 from "../../assets/placeholder.gif"
                 set('guan', guan1, 1)
                 set('proname', proname1, 1)
                 set('shopsid', shopsid1, 1)
-                if (this.verificationStatus == 1) {
+                if (this.verificationStatus == 0) {
                     $('.modal-bodys').text('您未身份验证，请先验证！')
                     $('#myModal').modal('show')
                 }else{
@@ -201,7 +201,7 @@ import placeholder2 from "../../assets/placeholder.gif"
 }
 .pu>div:nth-child(1){
     width: 15vw; height: 15vw; text-align: center; margin-top: 1vw;
-    line-height: 13vw; background: url('../../assets/img/qianming/icon2_shop_@2x.png') no-repeat; background-size: 100% 100%;
+    line-height: 13vw;
 }
 .pu>div:nth-child(1)>img{
     width: 100%; height: 100%;

@@ -123,7 +123,7 @@ import placeholder2 from "../../assets/placeholder.gif"
 }
 .pu>div:nth-child(1){
     width: 15vw; height: 15vw; text-align: center; margin-top: 1vw; margin-left: 3vw;
-    line-height: 13vw; background: url('../../assets/img/qianming/icon2_shop_@2x.png') no-repeat; background-size: 100% 100%;
+    line-height: 13vw;
 }
 .pu>div:nth-child(1)>img{
     width: 100%; height: 100%;

@@ -132,7 +132,7 @@
             },
             register(event) {
                 event.preventDefault()
-                if(!(/^1[34578]\d{9}$/.test($('#phone').val()))){
+                if(!(/^1[123456789]\d{9}$/.test($('#phone').val()))){
                     $('#span').removeClass('glyphicon-ok-circle').addClass('glyphicon-remove-circle')
                     $('.modal-bodys').text('请输入正确的手机号')
                     $('#myModal').modal('show')

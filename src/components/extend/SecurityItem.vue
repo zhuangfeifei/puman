@@ -223,7 +223,7 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
 }
 .touxiang{
     width: 10vw; height: 10vw; float: right; margin-right: 5vw; 
-    margin-top: 0.75vw; background: url('../../assets/img/qianming/icon1_shop_@2x.png') no-repeat; background-size: 100% 100%;
+    margin-top: 0.75vw;
 }
 .touxiang img{
     width: 10vw; height: 10vw; position: relative; left: -20vw; top: -20vw;
