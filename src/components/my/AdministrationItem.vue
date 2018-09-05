@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="shu" v-show="isShow">暂无数据</div>
-        <router-link to="/Equityholder1">
+        <router-link to="/Equityholder">
             <button class="btn code1" type="button">成为权益人</button>
         </router-link>
     </div>

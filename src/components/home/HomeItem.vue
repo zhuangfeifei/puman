@@ -7,32 +7,28 @@
                 <div class="leiji">
                     <div>
                         <p>
-                            <span v-if="isShow1">&nbsp;&nbsp;{{data.totalIncome}}</span>
-                            <span v-if="isShow">&nbsp;&nbsp;0.00</span>
+                            <countup :end-val="totalIncome" :duration="1" :decimals="2" class="demo1"></countup>
                         </p>
                         <p class="lei">累计收益</p>
-                        <img src="../../assets/img/home/quan1@2x.png" alt="">
+                        <van-circle class="imgs" v-model="currentRate" :rate="80" size="41vw" :stroke-width="55" color="#f18c47" layer-color="#191919" :speed="100" />
                     </div>
                 </div>
                 <div class="xinxi">
                     <div @click="yiti">                   
                         <p>
-                            <span v-show="isShow1">&nbsp;&nbsp;{{data.alreadyCash}}</span>
-                            <span v-show="isShow">&nbsp;&nbsp;0.00</span>
+                            <span>&nbsp;&nbsp;{{data.alreadyCash || 0.00}}</span>
                         </p>
                         <p>已提现</p>
                     </div>
                     <div @click="tixian">                
                         <p>
-                            <span v-show="isShow1">&nbsp;&nbsp;{{data.applyCash}}</span>
-                            <span v-show="isShow">&nbsp;&nbsp;0.00</span>
+                            <span>&nbsp;&nbsp;{{data.applyCash || 0.00}}</span>
                         </p>
                         <p>提现中</p>
                     </div>
                     <div>              
                         <p>
-                            <span v-show="isShow1">&nbsp;&nbsp;{{data.balance}}</span>
-                            <span v-show="isShow">&nbsp;&nbsp;0.00</span>
+                            <span>&nbsp;&nbsp;{{data.balance || 0.00}}</span>
                         </p>
                         <p>可提现</p>
                     </div>
@@ -98,18 +94,21 @@
 <script>
 import {httpUrl} from "../../api.js"
 import { Loading, XButton} from 'vux'
-import { Group, PopupRadio } from 'vux'
+import { Group, PopupRadio,Countup } from 'vux'
 	export default {
         data(){
             return{
                 token:'',buyerId:'',Data:[],data:'',isShow:false,isShow1:true,array:'',name:'',
                 option1: '',DataIndex:0,DataTime:'',DataList:'',xinweng:'',xinweng1:'',imgUrl:'',
-                yanse:'',content:'',shopsid:'',shopsnumber:''
+                yanse:'',content:'',shopsid:'',shopsnumber:'',currentRate: 0,totalIncome: 0
             }
         },
         components: {
             Loading,
-            XButton,PopupRadio,Group
+            XButton,PopupRadio,Group,Countup
+        },
+        computed:{
+            
         },
         mounted(){
             
@@ -146,10 +145,7 @@ import { Group, PopupRadio } from 'vux'
                 // console.log(response.body)
                 if(response.body.code == 200){
                     this.data = response.body.account
-                    if(response.body.account == ''){
-                        this.isShow1 = false
-                        this.isShow = true
-                    }
+                    this.totalIncome = response.body.account.totalIncome || 0.00
                 }
             },response => {
                 this.$vux.loading.show({
@@ -283,32 +279,9 @@ import { Group, PopupRadio } from 'vux'
     display: none;
 }
 
-/*顶部*/
-#nav{
-    width: 100%; height: 15vw;
-    position: fixed; top: 0;
-    background-color: white;
-    border-bottom: 0.3vw solid gainsboro;
-}
-#nav .header{
-    width: 100%; height: 100%;
-    text-align: center;
-    line-height: 15vw;
-} 
-.fa{
-    float: left; margin-left: 5vw;
-    font-size: 10vw;
-    line-height: 15vw; color: black
-}
-#nav .header span{
-    margin-left: -8vw;
-    font-size: 5.5vw; 
-    line-height: 15vw;
-}
-#nav>img{
-    margin-top: -5vw; width: 100%;
-}
 
+
+.demo1{ position: relative; left: 2vw;}
 /*提现*/
 .tixian{
     width: 100%; padding-bottom: 2vw;
@@ -328,7 +301,7 @@ import { Group, PopupRadio } from 'vux'
 .leiji>div>p:nth-child(1){
     font-size: 7vw; margin-left: -4vw;
 }
-.leiji>div>img{
+.imgs{
     width: 41vw; height: 42vw; position: absolute; top: -0.5vw; left: -0.5vw;
 }
 .xinxi{

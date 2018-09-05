@@ -32,6 +32,10 @@ Vue.use(ToastPlugin)
 Vue.use(ConfirmPlugin)
 Vue.use(LoadingPlugin)
 
+import Vant from 'vant';
+import 'vant/lib/vant-css/index.css';
+Vue.use(Vant);
+
 
 import storage from './storage'
 Vue.prototype.$storage = storage

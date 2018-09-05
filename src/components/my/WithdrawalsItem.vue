@@ -18,7 +18,7 @@
         <div class="yue">
             <span class="yuer">可提现金额</span><span>{{yuer}}</span>
         </div>
-        <p class="jine"><span>注意：单笔提现金额必需≥100元，可能会有延迟等问题。</span></p>
+        <p class="jine"><span>注意：提现可能会有延迟等问题。</span></p>
         <button @click="tixian" type="button" :disabled="checked" class="btn" :class="{btns:checked}">确认提现</button>
 
 
@@ -164,14 +164,14 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
                 var yuer = parseInt(this.yuer)
                 $(document).ready(function(){
                     var asd = parseInt($('.name').val())
-                    if(asd == '' || asd < 100 || asd > yuer){
-                        $('.modal-bodys1').text('金额不能小于100元或大于余额')
-                        $('#myModal1').modal('show')
-                        setTimeout(() => {
-                            $('#myModal1').modal('hide')
-                        },3000)
-                        return
-                    }
+                    // if(asd == '' || asd < 100 || asd > yuer){
+                    //     $('.modal-bodys1').text('金额不能小于100元或大于余额')
+                    //     $('#myModal1').modal('show')
+                    //     setTimeout(() => {
+                    //         $('#myModal1').modal('hide')
+                    //     },3000)
+                    //     return
+                    // }
                     if (kahao == '') {
                         $('.modal-bodys2').text('银行卡为空，请先签约')
                         $('#myModal2').modal('show')
@@ -185,6 +185,9 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
             },
             queding(){
                 $('#myModal').modal('hide')
+                this.$vux.loading.show({
+                    text: '正在提现！'
+                })
                 var token = this.token
                 var userId = this.userId
                 var bankNo = this.bankcard
@@ -195,6 +198,7 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
                 this.$http.post(httpUrl.dev + '/puman/api/rent/apply',{token,userId,drawCash,bankNo,bankName},{ emulateJSON: true })
                 .then(response => {
                     // console.log(response.body)
+                    this.$vux.loading.hide()
                     if(response.body.code == 200){
                         this.$router.push({ name: "zhifuwc" })
                     }else{

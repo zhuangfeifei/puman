@@ -7,8 +7,7 @@ module.exports = {
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: 'http://www.homeamc.cn/puman/static/phone/',  
-    // http://www.homeamc.cn:8080
+    assetsPublicPath: 'http://www.homeamc.cn/puman/static/phone/',
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
@@ -30,7 +29,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       "/fangyuanli":{
-    		target:"http://192.168.1.79:8080",
+    		target:"http://192.168.1.137:8080",
     		changeOrigin: true,
     		pathRewrite: {
           '^/fangyuanli': ''

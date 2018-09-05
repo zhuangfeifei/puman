@@ -172,25 +172,22 @@ import placeholder3 from "../../assets/img/首页_1/u9088.png"
 /*商铺*/
 #shangpu{
     width: 100%; font-size: 4vw;
-    /*border:1px solid red;*/
 }
 .pu{
     width: 90%; height: 25vw; margin: 2vw auto; padding-top: 3.5vw; clear: both;
-    /*border: 1px solid gray;*/
     background: url('../../assets/img/home/quanyiback.png') no-repeat; background-size: 100% 100%;
 }
 .pus{
     width: 90%; height: 35vw; margin: 2vw auto; padding-top: 3.5vw; clear: both;
-    /*border: 1px solid gray;*/
     background: url('../../assets/img/home/quanyibacks.png') no-repeat; background-size: 100% 100%;
 }
 .pu>div{
     width: 24%; height: 100%; float: left;
-    /*border:1px solid red; */
 }
 .pu>div:nth-child(1){
     width: 15vw; height: 15vw; text-align: center; margin-top: 1vw; margin-left: 3vw;
-    line-height: 13vw; background: url('../../assets/img/home/quanyi.png') no-repeat; background-size: 100% 100%;
+    line-height: 13vw; 
+    // background: url('../../assets/img/home/quanyi.png') no-repeat; background-size: 100% 100%;
 }
 .pu>div:nth-child(1)>img{
     width: 100%; height: 100%;
